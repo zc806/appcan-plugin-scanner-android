@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <uexplugins>
     <plugin
-        uexName="uexScanner" version="3.0.5" build="5">
-        <info>5:优化扫描界面</info>
+        uexName="uexScanner" version="3.0.7" build="7">
+		<info>7:修复uexScanner扫码画面颠倒问题</info>
+        <build>6:修复插件包打包错误问题</build>
+        <build>5:优化扫描界面</build>
         <build>4:CreateBarCode不能调用问题</build>
         <build>3:新增生成条形码和二维码接口</build>
         <build>2:修复手动输入条形码崩溃问题</build>

@@ -18,7 +18,9 @@ package org.zywx.wbpalmstar.plugin.uexzxing.client.android.camera;
 
 import java.lang.reflect.Method;
 import java.util.regex.Pattern;
+
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.Build;
@@ -86,16 +88,19 @@ final class CameraConfigurationManager {
 		setFlash(parameters);
 		setZoom(parameters);
 		String mod = Build.MODEL;
-		if (Build.VERSION.SDK_INT >= 8) {
-			// MZ 180，	other 90...
-			if("M9".equalsIgnoreCase(mod) || "MX".equalsIgnoreCase(mod)){
-				setDisplayOrientation(camera, 180);
-			}else{
-				setDisplayOrientation(camera, 90);
+		int orientation = context.getResources().getConfiguration().orientation;
+		if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			if(Build.VERSION.SDK_INT >= 8) {
+				setDisplayOrientation(camera, -90);
+			}else {
+				parameters.set("rotation", -90);
 			}
-		} else {
-			parameters.set("orientation", "portrait");
-			parameters.set("rotation", 90);
+		}else {
+			if(Build.VERSION.SDK_INT >= 8) {
+				setDisplayOrientation(camera, 90);
+			}else {
+				parameters.set("rotation", 90);
+			}
 		}
 		camera.setParameters(parameters);
 	}
